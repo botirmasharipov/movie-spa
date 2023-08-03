@@ -11,27 +11,20 @@ export const useHomeFetch = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(endpoint, options);
+      const response = await fetch(endpoint);
       const data = await response.json();
       setState(data.results);
     } catch (err) {
       setError(true);
       console.log(err);
     }
-
     setLoading(false);
   };
 
   useEffect(() => {
-    const options = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${API_KEY}`,
-      },
-    };
+    
 
-    fetchMovies(`${API_URL}movie/popular?api_key=${API_KEY}`, options);
+    fetchMovies(`${API_URL}movie/popular?api_key=${API_KEY}`);
   }, []);
 
   return [{ state, loading, error }, fetchMovies];
