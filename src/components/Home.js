@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {
-  API_URL, 
-  API_KEY, 
+  POPULAR_BASE_URL,
+  SEARCH_BASE_URL,
   IMAGE_BASE_URL, 
   POSTER_SIZE, 
   BACKDROP_SIZE 
@@ -25,9 +25,17 @@ const Home = () => {
 
   const [searchTerm, setSearchTerm] = useState("");
 
-    const loadMoreMovies = () => {
-    const searchEndpoint = `${API_URL}search/movie?api_key=${API_KEY}&query=${searchTerm}&page=${state.currentPage + 1} ` //give the other page
-    const popularEndpoint = `${API_URL}movie/popular?api_key=${API_KEY}&page=${state.currentPage + 1}`
+   //if we have a search word, show user search 
+  const searchMovies = search => {
+    const endpoint = search ? SEARCH_BASE_URL + search : POPULAR_BASE_URL;
+
+    setSearchTerm(search);
+    fetchMovies(endpoint);
+  }
+
+  const loadMoreMovies = () => {
+    const searchEndpoint = `${SEARCH_BASE_URL}${searchTerm}&page=${state.currentPage + 1} ` //give the other page
+    const popularEndpoint = `${POPULAR_BASE_URL}&page=${state.currentPage + 1}`
 
     //show movies for search or load more 
     const endpoint = searchTerm ? searchEndpoint : popularEndpoint;
@@ -36,15 +44,19 @@ const Home = () => {
 
   if(error) return <div>Something went wrong...</div>
   if(!state[0]) return <Spinner />  //show loader
-  console.log("state", state[0])
-  console.log(`${IMAGE_BASE_URL}${BACKDROP_SIZE}${state.backdrop_path}`)
+  // console.log("state", state[0])
+  // console.log(`${IMAGE_BASE_URL}${BACKDROP_SIZE}${state[0].backdrop_path}`)
+  
   return (
   <>
-    <HeroImage image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${state.backdrop_path}`}
-       title={state.original_title}
-       text={state.overview}
-       />
-    <SearchBar />
+   { !searchTerm && (
+        <HeroImage image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${state[0].backdrop_path}`}
+          title={state.original_title}
+          text={state.overview}
+        />
+      )}
+    <SearchBar callback={searchMovies} />
+      
     <Grid header={searchTerm ? 'Search Results' : 'Popular Movies' } >
      {state.map(movie => (
        <MovieThumb 
