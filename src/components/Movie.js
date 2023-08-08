@@ -11,11 +11,14 @@ const Movie = () => {
   const { movieId } = useParams(); 
   const [movie, loading, error] = useMovieFetch(movieId);
   console.log(movie, "movie");
+  
+  if (error) return <div>Something went wrong</div>
+  if(loading) return <Spinner />
 
   return (
   	<>
-		<Navigation />
-		<MovieInfo />
+		<Navigation movie={movie.original_title} />
+		<MovieInfo  movie={movie} />
 		<MovieInfoBar />
 		<Grid >
 			<Actor />
