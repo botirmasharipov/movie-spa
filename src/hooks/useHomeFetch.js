@@ -6,7 +6,7 @@ export const useHomeFetch = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const fetchMovies = async (endpoint, options) => { // Add 'options' parameter here
+  const fetchMovies = async (endpoint) => { // Add 'options' parameter here
     setError(false);
     setLoading(true);
 
