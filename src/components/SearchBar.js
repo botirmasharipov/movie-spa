@@ -26,7 +26,7 @@ const SearchBar = ({ callback }) => {
   return (
     <StyledSearchBar>
       <StyledSearchBarContent>
-       <FontAwesomeIcon icon={faSearch} name="search" size="2x"/>
+       <FontAwesomeIcon icon={faSearch} name="search" size="2x" className='fa-search'/>
         <input
           type="text"
           placeholder="Search movie"

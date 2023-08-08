@@ -1,3 +1,3 @@
-const Spinner = () => <div>Spinner </div>;
+import { Spinner } from '../styles/StyledSpinner';
 
 export default Spinner;
