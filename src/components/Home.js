@@ -44,9 +44,8 @@ const Home = () => {
 
   if(error) return <div>Something went wrong...</div>
   if(!state[0]) return <Spinner />  //show loader
-  console.log("state", state[0])
-  console.log(`${IMAGE_BASE_URL}${BACKDROP_SIZE}${state[0].backdrop_path}`)
-  
+  // console.log("state", state[0].id)
+  // console.log(`${IMAGE_BASE_URL}${BACKDROP_SIZE}${state[0].backdrop_path}`)
   return (
   <>
    { !searchTerm && (
@@ -58,7 +57,7 @@ const Home = () => {
     <SearchBar callback={searchMovies} />
       
     <Grid header={searchTerm ? 'Search Results' : 'Popular Movies' } >
-     {state.map(movie => (
+     {state.map(movie =>  (
        <MovieThumb 
           key={movie.id}
           clickable
