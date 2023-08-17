@@ -7,7 +7,15 @@
 - React
 - React Router v5.2
 - Font Awesome
-- styled-components
+- [styled-components](https://styled-components.com/)
+- [TMDB API](https://developer.themoviedb.org/docs)
+- Netlify
+
+## Main features of movie app:
+
+- Displaying Popular Movies: Fetach movies based on popularity
+- Movie Summary Page: detailed movie information including IMDb rating, budget, plot, running time, actors, and revenue.
+- Search Functionality: Find movies by name.
 
 ## Available Scripts
 
